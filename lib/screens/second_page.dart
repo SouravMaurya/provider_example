@@ -2,23 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_example/constants/constant.dart';
 import 'package:provider_example/providers/counter_provider.dart';
-import 'package:provider_example/screens/second_page.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class SecondPage extends StatefulWidget {
+  const SecondPage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SecondPage> createState() => _SecondPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Second Page'),
       ),
       body: Center(
         child: Column(
@@ -35,18 +32,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             ),
-            SizedBox(height: 200),
-            MaterialButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SecondPage(),
-                    ));
-              },
-              child: Text('Move to next page'),
-              color: Colors.blue.withOpacity(0.3),
-            )
           ],
         ),
       ),
