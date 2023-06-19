@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_example/constants/constant.dart';
 import 'package:provider_example/providers/counter_provider.dart';
+import 'package:provider_example/providers/theme_provider.dart';
 import 'package:provider_example/screens/second_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             ),
-            SizedBox(height: 200),
+            SizedBox(height: 100),
             MaterialButton(
               onPressed: () {
                 Navigator.push(
@@ -45,6 +46,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     ));
               },
               child: Text('Move to next page'),
+              color: Colors.blue.withOpacity(0.3),
+            ),
+            SizedBox(height: 100),
+            MaterialButton(
+              onPressed: () {
+                Provider.of<ThemeProvider>(context, listen: false)
+                    .changeTheme(ThemeData(
+                  primarySwatch: Colors.red,
+                ));
+              },
+              child: Text('Change theme'),
               color: Colors.blue.withOpacity(0.3),
             )
           ],

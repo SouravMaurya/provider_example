@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider_example/constants/constant.dart';
 import 'package:provider_example/providers/counter_provider.dart';
+import 'package:provider_example/providers/theme_provider.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({Key? key}) : super(key: key);
@@ -32,6 +33,17 @@ class _SecondPageState extends State<SecondPage> {
                 );
               },
             ),
+            SizedBox(height: 100),
+            MaterialButton(
+              onPressed: () {
+                Provider.of<ThemeProvider>(context, listen: false)
+                    .changeTheme(ThemeData(
+                  primarySwatch: Colors.green,
+                ));
+              },
+              child: Text('Change theme'),
+              color: Colors.blue.withOpacity(0.3),
+            )
           ],
         ),
       ),
