@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider_example/constants/constant.dart';
+import 'package:provider_example/constants/string_constant.dart';
 import 'package:provider_example/providers/counter_provider.dart';
 import 'package:provider_example/screens/second_page.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({
+    super.key,
+  });
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -16,17 +16,42 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    /// Creating object of CounterProvider with listenable value false
+    CounterProvider counterProvider =
+        Provider.of<CounterProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text(StringConstants.firstPage),
+        actions: [
+          InkWell(
+            onTap: () {
+              /// For navigating to next page
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SecondPage(),
+                  ));
+            },
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Tooltip(
+                  message: StringConstants.moveToNextPage,
+                  child: Icon(
+                    Icons.navigate_next,
+                    size: 40,
+                  )),
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              Constants.youHavePushed,
+              StringConstants.youHavePushed,
             ),
+            const SizedBox(height: 15),
             Consumer<CounterProvider>(
               builder: (BuildContext context, value, Widget? child) {
                 return Text(
@@ -35,25 +60,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             ),
-            SizedBox(height: 200),
-            MaterialButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SecondPage(),
-                    ));
-              },
-              child: Text('Move to next page'),
-              color: Colors.blue.withOpacity(0.3),
-            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed:
-            Provider.of<CounterProvider>(context, listen: false).addCounter,
-        tooltip: 'Increment',
+        onPressed: counterProvider.incrementCounter,
+        tooltip: StringConstants.increment,
         child: const Icon(Icons.add),
       ),
     );

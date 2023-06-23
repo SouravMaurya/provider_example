@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 
 class CounterProvider extends ChangeNotifier {
-  var _counter = 0;
+  int _counter = 0;
 
   int get counter => _counter;
 
-  void addCounter() {
+  void incrementCounter() {
     _counter++;
+
+    /// It will notify all it's consumer where there is change in value.
     notifyListeners();
   }
 }
